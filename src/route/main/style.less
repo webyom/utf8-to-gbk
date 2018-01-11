@@ -1,0 +1,32 @@
+@import '../../style/variables.less';
+@import '../../style/mixins.less';
+
+.__module_class_name__ {
+  position: absolute;
+  left: @app-margin-large;
+  top: @app-margin-large;
+  right: @app-margin-large;
+  bottom: @app-margin-large;
+  .panel-drop {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0;
+    text-align: center;
+    font-size: @font-size-base * 2;
+    &.drag-over {
+      border-color: @brand-primary;
+    }
+    .content {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      margin-top: -70px;
+      .fa-download {
+        font-size: 100px;
+      }
+    }
+  }
+}

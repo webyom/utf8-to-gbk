@@ -1,0 +1,14 @@
+{
+  "local": {
+    "apiBase": "//local-newapi.ddicar.com:4080/v3"
+  },
+  "development": {
+    "apiBase": "https://dev-newapi.ddicar.com/v3"
+  },
+  "staging": {
+    "apiBase": "https://stg-newapi.ddicar.com/v3"
+  },
+  "production": {
+    "apiBase": "https://newapi.ddicar.com/v3"
+  }
+}

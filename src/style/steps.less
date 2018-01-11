@@ -1,0 +1,77 @@
+@import './variables.less';
+@import './mixins.less';
+
+ol.steps {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  display: table;
+  margin-bottom: 40px;
+  position: relative;
+  left: 11px;
+  > li {
+    text-align: left;
+    display: table-cell;
+    background-image: url(/img/steps-dot.png);
+    background-size: auto 22px;
+    background-repeat: repeat-x;
+    background-position-y: 9px;
+    &:last-child {
+      text-align: right;
+      width: 1px;
+      background: none;
+    }
+    &.active {
+      background-image: url(/img/steps-dot.png);
+      background-position-y: -8px;
+      > span {
+        > i {
+          background-color: #fff;
+          border: 1px solid @brand-primary;
+          color: @gray;
+        }
+      }
+    }
+    &.done {
+      background-image: url(/img/steps-dot.png);
+      background-position-y: -8px;
+      > span {
+        > i {
+          background-color: @brand-primary;
+          border: 1px solid @brand-primary;
+          color: #fff;
+        }
+      }
+    }
+    > span {
+      display: inline-block;
+      position: relative;
+      left: -11px;
+      > i {
+        display: inline-block;
+        width: 22px;
+        height: 22px;
+        line-height: 22px;
+        background-color: @gray-lighter;
+        border: 1px solid darken(@gray-lighter, 10%);
+        border-radius: 50%;
+        text-align: center;
+        font-style: normal;
+        color: darken(@gray-lighter, 20%);
+      }
+      > span {
+        display: inline-block;
+        position: absolute;
+        width: 100px;
+        top: 100%;
+        left: 50%;
+        margin-left: -50px;
+        margin-top: 2px;
+        text-align: center;
+        font-size: @font-size-base * 0.9;
+        color: @gray-light;
+      }
+    }
+  }
+}

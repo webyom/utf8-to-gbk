@@ -1,0 +1,98 @@
+.route-points() {
+  > .route-point {
+    margin-bottom: 0;
+    > label {
+      position: relative;
+      &:before {
+        content: '';
+        position: absolute;
+        right: -5px;
+        top: 12px;
+        width: 10px;
+        height: 10px;
+        border: 2px solid @brand-warning;
+        border-radius: 50%;
+        background-color: #fff;
+        z-index: 2;
+      }
+    }
+    > div {
+      position: relative;
+      min-height: 72px;
+      &:before, &:after {
+        content: '';
+        position: absolute;
+        left: -1px;
+        top: 15px;
+        bottom: 0;
+        width: 2px;
+        background-color: @brand-primary;
+      }
+      &:after {
+        top: 0;
+        height: 15px;
+      }
+      > .btn-add-route {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        left: -10px;
+        top: 50%;
+        margin-top: 7px;
+        border: 2px solid darken(@gray-lighter, 10%);
+        border-radius: 50%;
+        background-color: #fff;
+        cursor: pointer;
+        &:before, &:after {
+          content: '';
+          position: absolute;
+          left: 7px;
+          top: 2px;
+          bottom: 2px;
+          width: 2px;
+          background-color: darken(@gray-lighter, 10%);
+        }
+        &:after {
+          height: 2px;
+          top: 7px;
+          left: 2px;
+          right: 2px;
+          bottom: auto;
+          width: auto;
+        }
+        &:hover {
+          border-color: darken(@gray-lighter, 20%);
+          &:before, &:after {
+            background-color: darken(@gray-lighter, 20%);
+          }
+        }
+      }
+    }
+    &:first-child {
+      > label {
+        &:before {
+          border-color: @brand-success;
+        }
+      }
+      > div {
+        &:after {
+          display: none;
+        }
+      }
+    }
+    &:last-child {
+      margin-bottom: 15px;
+      > label {
+        &:before {
+          border-color: @brand-danger;
+        }
+      }
+      > div {
+        padding-bottom: 0;
+        &:before {
+          display: none;
+        }
+      }
+    }
+  }
+}

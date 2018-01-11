@@ -1,0 +1,86 @@
+@import './variables.less';
+@import './mixins.less';
+
+button, .btn {
+  outline: none !important;
+}
+
+.form-group, .validate-group {
+  position: relative;
+}
+
+.has-error {
+  .form-group, .validate-group {
+    .form-control {
+      border-color: @input-border;
+      &:focus {
+        .form-control-focus();
+      }
+    }
+    &.has-error {
+      .form-control-validation(@state-danger-text; @state-danger-text; @state-danger-bg);
+    }
+  }
+}
+.help-error {
+  display: none;
+  margin-bottom: 0;
+  margin-top: -2px;
+  font-size: 12px;
+  position: absolute;
+  top: 100%;
+  max-width: 100%;
+  .text-overflow();
+}
+.help-note {
+  color: @gray-light !important;
+  font-size: @font-size-base * 0.9;
+  margin-bottom: 0;
+}
+
+.control-label {
+  color: @gray !important;
+}
+
+span.mandatory, span.required {
+  color: red;
+}
+
+span.form-control {
+  border-color: transparent;
+  box-shadow: none;
+  height: auto;
+  padding-left: 0;
+  padding-right: 0;
+  min-height: 34px;
+  &.ellipsis {
+    .text-overflow();
+  }
+}
+.form-vertical {
+  .form-group {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+.form-horizontal--edge {
+  .control-label {
+    text-align: left;
+  }
+  .form-control {
+    text-align: right;
+  }
+}
+
+.form-horizontal--readonly {
+  .form-group {
+    margin-bottom: 0;
+  }
+}
+
+.form-horizontal--label-left {
+  .control-label {
+    text-align: left;
+  }
+}

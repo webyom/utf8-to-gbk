@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>UTF-8 to GBK</title>
+    <link rel="stylesheet" href="style/vendor/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="style/vendor/hint-css/hint.css" />
+    <link rel="stylesheet" href="style/main.css" />
+  </head>
+  <body>
+    <div class="app-wrapper"></div>
+    <script>
+      require('electron-is-dev') && require('electron-connect').client.create();
+
+      global.$ = global.jQuery = require('jquery');
+      require('bootstrap');
+      require('./boot');
+    </script>
+  </body>
+</html>

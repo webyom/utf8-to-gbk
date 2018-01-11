@@ -1,0 +1,59 @@
+@import './variables.less';
+@import './mixins.less';
+
+.result {
+  text-align: center;
+  margin: @app-margin-large 0;
+  > div {
+    display: inline-block;
+    position: relative;
+    padding-left: 80px;
+    margin: 0 auto;
+    > div:first-child {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 60px;
+      height: 60px;
+      text-align: center;
+      border-radius: 50%;
+      background-color: @gray-lighter;
+      color: @brand-primary;
+      > .fa, > .iconfont {
+        font-size: 36px;
+        line-height: 60px;
+      }
+    }
+    > h4 {
+      margin-top: 3px;
+      text-align: left;
+    }
+    > div:last-child {
+      text-align: left;
+      margin-bottom: 0;
+      p:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+.result-success > div > div:first-child {
+  background-color: @state-success-bg;
+  color: @brand-success;
+}
+
+.result-danger > div > div:first-child, .result-error > div > div:first-child {
+  background-color: @state-danger-bg;
+  color: @brand-danger;
+}
+
+.result-info > div > div:first-child {
+  background-color: @state-info-bg;
+  color: @brand-info;
+}
+
+.result-warning > div > div:first-child {
+  background-color: @state-warning-bg;
+  color: @brand-warning;
+}

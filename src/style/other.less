@@ -1,0 +1,150 @@
+@import './variables.less';
+@import './mixins.less';
+
+/* yom-data-grid */
+.yom-data-grid-no-wrap-border .yom-data-grid {
+  border: none;
+}
+.yom-data-grid-setting-panel .yom-data-grid-setting-columns-container-inner {
+  max-height: 166px;
+}
+
+/* yom-auto-complete */
+.dropdown-menu[data-type="auto-complete"] {
+  margin-bottom: @app-margin-large;
+}
+
+/* iconfont */
+.iconfont {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  text-rendering: auto;
+  font-size: inherit;
+}
+
+/* app-nav-pills */
+.app-nav-pills {
+  margin-bottom: @app-margin-large;
+  border-bottom: 1px solid @gray-lighter;
+  > li {
+    > a {
+      color: @gray-light;
+      &:hover, &:active, &:focus {
+        color: @gray;
+        background-color: transparent;
+      }
+    }
+    &.active {
+      border-bottom: 2px solid @brand-primary;
+      > a, > a:hover, > a:active, > a:focus {
+        color: @brand-primary;
+        background-color: transparent;
+      }
+    }
+  }
+}
+.app-nav-pills--no-border {
+  border-bottom: none;
+}
+
+/* panel */
+.app-panel {
+  border: none;
+  box-shadow: none;
+  .panel-heading {
+    padding: @app-padding-small 0;
+    background-color: transparent;
+    border-bottom: 1px solid @gray-lighter;
+    > h4 {
+      position: relative;
+      margin: 0;
+      > * {
+        padding: 0;
+        margin: 0;
+        display: block;
+        & + a[data-toggle="collapse"] {
+          position: absolute !important;
+          margin: 0;
+          right: 0;
+          top: 0;
+          width: 20px;
+          height: 20px;
+          text-indent: -9999px;
+        }
+        > input {
+          margin: 0;
+        }
+      }
+      > a[data-toggle="collapse"] {
+        text-decoration: none;
+        position: relative;
+        color: @gray-light;
+        &:before {
+          content: '';
+          border-bottom: 5px solid @gray-light;
+          border-left: 5px solid transparent;
+          border-right: 5px solid transparent;
+          position: absolute;
+          top: @app-padding-base;
+          right: 0;
+        }
+        &.collapsed:before {
+          border-top: 5px solid @gray-light;
+          border-bottom: none;
+        }
+        &:hover {
+          color: @gray;
+          &:before {
+            border-top-color: @gray;
+            border-bottom-color: @gray;
+          }
+        }
+      }
+      > label {
+        display: inline-block;
+      }
+    }
+  }
+  .panel-body {
+    border-top: none !important;
+    padding: 0;
+    padding-top: @app-margin-large;
+  }
+  .panel-heading__more {
+    right: 0;
+  }
+}
+.panel-group {
+  > .app-panel {
+    + .app-panel {
+      margin-top: @app-margin-large;
+    }
+  }
+}
+.panel-heading {
+  position: relative;
+}
+.panel-heading__more {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  height: 22px;
+  line-height: 22px;
+  margin-top: -11px;
+}
+.panel {
+  > div > .yom-data-grid-container > .yom-data-grid {
+    border: none;
+  }
+}
+
+/* no-data */
+.no-data {
+  text-align: center;
+  margin: @app-margin-large 0;
+  color: @gray-light;
+  > i {
+    font-size: 120px;
+    color: @gray-lighter;
+  }
+}

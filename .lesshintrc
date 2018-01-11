@@ -1,0 +1,64 @@
+{
+  "attributeQuotes": false,
+  "borderZero": false,
+  "comment": false,
+  "decimalZero": false,
+  "depthLevel": {
+    "enabled": false,
+    "depth": 5
+  },
+  "duplicateProperty": false,
+  "emptyRule": true,
+  "finalNewline": false,
+  "hexLength": false,
+  "hexNotation": false,
+  "hexValidation": true,
+  "idSelector": true,
+  "importantRule": false,
+  "importPath": false,
+  "propertyOrdering": false,
+  "propertyUnits": false,
+  "qualifyingElement": false,
+  "selectorNaming": {
+    "enabled": true,
+    "disallowUppercase": false,
+    "disallowUnderscore": false,
+    "exclude": []
+  },
+  "singleLinePerProperty": true,
+  "singleLinePerSelector": false,
+  "spaceAfterPropertyColon": {
+    "enabled": true,
+    "style": "one_space"
+  },
+  "spaceAfterPropertyName": {
+    "enabled": true,
+    "style": "no_space"
+  },
+  "spaceAfterPropertyValue": {
+    "enabled": true,
+    "style": "no_space"
+  },
+  "spaceAroundComma": {
+    "enabled": true,
+    "style": "after"
+  },
+  "spaceAroundOperator": {
+    "enabled": true,
+    "style": "both"
+  },
+  "spaceBeforeBrace": {
+    "enabled": true,
+    "style": "one_space"
+  },
+  "spaceBetweenParens": {
+    "enabled": true,
+    "style": "no_space"
+  },
+  "stringQuotes": false,
+  "trailingSemicolon": true,
+  "trailingWhitespace": true,
+  "urlFormat": false,
+  "urlQuotes": false,
+  "zeroUnit": false
+}

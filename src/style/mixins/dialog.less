@@ -1,0 +1,128 @@
+@dialog-operation-panel-width: 200px;
+
+.dialog-no-foot() {
+  .dialog-body {
+    bottom: 0;
+    .bottom-btns {
+      margin-top: @app-margin-large;
+      padding-top: @app-padding-large;
+      border-top: 1px solid @gray-lighter;
+      text-align: center;
+      &.text-left {
+        text-align: left;
+      }
+      &.text-right {
+        text-align: right;
+      }
+      .btn + .btn {
+        margin-left: @app-margin-base;
+      }
+    }
+  }
+}
+
+.dialog-body-shrink-content() {
+  padding: @app-padding-large (@app-padding-large * 6 - 2px);
+}
+
+.dialog-operation-panel() {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: @dialog-operation-panel-width;
+  padding: @app-padding-large;
+  background-color: rgba(0, 0, 0, 0.04);
+  > .btn, > .btn-group {
+    width: 100%;
+    margin-bottom: @app-margin-small;
+  }
+  > .btn-group > .btn {
+    width: 100%;
+  }
+  & + div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: @dialog-operation-panel-width;
+    bottom: 0;
+    padding: @app-padding-large;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+}
+
+.dialog-relation() {
+  .clearfix();
+  span {
+    float: left;
+    width: 35px;
+    height: 35px;
+    font-size: 20px;
+    margin-right: 18px;
+    margin-bottom: 20px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 35px;
+    cursor: pointer;
+    background: darken(@gray-lighter, 3%);
+  }
+}
+
+.dialog-entity-summary() {
+  margin-bottom: @app-margin-base;
+  > .icon {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    text-align: center;
+    background-color: @gray-lighter;
+    margin-right: @app-margin-base;
+    > i {
+      font-size: 18px;
+      line-height: 30px;
+    }
+  }
+  > .name {
+    max-width: 300px;
+    font-size: 20px;
+    height: 30px;
+    line-height: 28px;
+    vertical-align: bottom;
+    margin-right: @app-margin-base;
+    display: inline-block;
+    .text-overflow();
+  }
+  > .postfix {
+    max-width: 118px;
+    color: lighten(@gray-light, 10%);
+    display: inline-block;
+  }
+  > .supplement {
+    display: block;
+    color: lighten(@gray-light, 10%);
+    margin-top: @app-margin-base;
+    padding-left: 35px;
+    height: 22px;
+    .text-overflow();
+  }
+}
+
+.dialog-entity-content() {
+  position: absolute;
+  top: 125px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: @app-padding-large;
+  overflow-y: auto;
+  &.tab-content {
+    padding: 0;
+    > .tab-pane {
+      height: 100%;
+      overflow-y: auto;
+      padding: @app-padding-large;
+    }
+  }
+}

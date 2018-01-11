@@ -1,0 +1,23 @@
+@import './variables.less';
+@import './mixins.less';
+
+.tooltip {
+  &.top .tooltip-arrow {
+    border-top-color: @brand-primary;
+  }
+  &.right .tooltip-arrow {
+    border-right-color: @brand-primary;
+  }
+  &.bottom .tooltip-arrow {
+    border-bottom-color: @brand-primary;
+  }
+  &.left .tooltip-arrow {
+    border-left-color: @brand-primary;
+  }
+  .tooltip-inner {
+    border: 2px solid @brand-primary;
+    color: @gray;
+    background-color: #fff;
+    text-align: left;
+  }
+}
