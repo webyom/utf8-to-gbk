@@ -31,7 +31,7 @@
     "key-spacing": [2, {"beforeColon": false, "afterColon": true}],
     "linebreak-style": [2, "unix"],
     "max-depth": [2, 7],
-    "max-nested-callbacks": [2, 4],
+    "max-nested-callbacks": [2, 3],
     "max-params": [2, 6],
     "new-cap": 0,
     "new-parens": 2,

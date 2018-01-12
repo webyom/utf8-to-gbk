@@ -12,7 +12,7 @@
   z-index: 999;
   text-indent: -9999px;
   &.loading {
-    animation-name: loading;
+    animation-name: app-loading-bar-anim;
     animation-duration: 30s;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
@@ -20,7 +20,7 @@
   }
 }
 
-@keyframes loading {
+@keyframes app-loading-bar-anim {
   0% {
     top: 0;
     width: 0%;
@@ -41,4 +41,86 @@
     top: 0;
     width: 95%;
   }
+}
+
+@loading-size-base: 30px;
+
+.loading-component-zoom(@zoom) {
+  > .loading-component__loader {
+    border-width: @loading-size-base / 10 * @zoom;
+    width: @loading-size-base * @zoom;
+    height: @loading-size-base * @zoom;
+    &:after {
+      width: @loading-size-base * @zoom;
+      height: @loading-size-base * @zoom;
+    }
+  }
+}
+
+.loading-component {
+  padding-top: @app-padding-base * 10;
+  padding-bottom: @app-padding-base * 10;
+  overflow: hidden;
+}
+
+.loading-component__loader {
+  margin: 0 auto;
+  position: relative;
+  text-indent: -9999px;
+  border: @loading-size-base / 10 solid @gray-lighter;
+  border-left-color: @gray-light;
+  border-radius: 50%;
+  width: @loading-size-base;
+  height: @loading-size-base;
+  transform: translateZ(0);
+  animation: loading-component-anim 1.1s infinite linear;
+  animation: loading-component-anim 1.1s infinite linear;
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    border-radius: 50%;
+    width: @loading-size-base;
+    height: @loading-size-base;
+  }
+}
+
+.loading-component--no-padding {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.loading-component--bright {
+  > .loading-component__loader {
+    border-color: lighten(@brand-primary, 30%);
+    border-left-color: @brand-primary;
+  }
+}
+
+.loading-component--large {
+  .loading-component-zoom(2);
+}
+
+.loading-component--xlarge {
+  .loading-component-zoom(4);
+}
+
+@keyframes loading-component-anim {
+  0% {
+    transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+#app-loading-component {
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  margin-left: -30px;
+  margin-top: -30px;
+  z-index: 999;
 }

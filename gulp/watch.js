@@ -14,7 +14,7 @@ var path = require('path'),
     lazyTasks = require('./lazy-tasks');
 
 // watch for changes and run the relevant task
-gulp.task('watch', function () {
+gulp.task('watch', function (done) {
   process.on('uncaughtException', function (err) {
     console.log(err.stack || err.message || err);
   });
@@ -81,4 +81,6 @@ gulp.task('watch', function () {
     gutil.log(gutil.colors.cyan('[changed]'), filePath);
     return gulp.start('i18n-resolve-reference');
   });
+
+  done();
 });

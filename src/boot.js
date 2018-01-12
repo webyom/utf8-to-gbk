@@ -1,10 +1,12 @@
 import $ from 'jquery';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {webFrame} from 'electron';
 import {useStrict} from 'mobx';
 import Skateboard from 'skateboardjs';
 import * as Util from './util/main';
 import path from 'path';
+import isDev from 'electron-is-dev';
 
 /**
  * use mobx strict mode
@@ -12,12 +14,25 @@ import path from 'path';
 useStrict(true);
 
 /**
+ * disable zooming
+ */
+webFrame.setZoomLevelLimits(1, 1);
+
+/**
  * define global properties
  */
+global.installDevtools = function () {
+  if (isDev) {
+    require('devtron').install();
+    require('electron-react-devtools').install();
+  }
+};
+
 global.resolveRoot = function (p) {
-  let parts = __filename.split('/src/');
+  let sep = path.sep + 'src' + path.sep;
+  let parts = __filename.split(sep);
   parts.pop();
-  return path.resolve(path.join(parts.join('/src'), 'dist'), p);
+  return path.resolve(path.join(parts.join(sep), 'dist'), p);
 };
 
 global.requireRoot = function (p) {
@@ -65,5 +80,6 @@ Skateboard.core.init({
     top && modName != ALERT_MOD_NAME &&  Skateboard.core.showAlert({type: 'error', subType: 'init_mod_fail', relModName: modName}, {holdMark: type == 'view'});
   },
   onFirstRender() {
+    $('#app-loading-component').remove();
   }
 });

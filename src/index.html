@@ -9,10 +9,14 @@
   </head>
   <body>
     <div class="app-wrapper"></div>
+    <div id="app-loading-component" class="loading-component loading-component--large loading-component--no-padding">
+      <div class="loading-component__loader">Loading...</div>
+    </div>
     <script>
       require('electron-is-dev') && require('electron-connect').client.create();
 
       global.$ = global.jQuery = require('jquery');
+      require('babel-polyfill');
       require('bootstrap');
       require('./boot');
     </script>

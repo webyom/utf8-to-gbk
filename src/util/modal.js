@@ -1,24 +1,34 @@
 import $ from 'jquery';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import classNames from 'classnames';
 import Route from './route';
 
 let containerDOM = $('<div class="app-modals"></div>').appendTo(document.body)[0];
 let modal = null;
 
-class ConfirmComponent extends React.Component {
+class DefaultComponent extends React.Component {
+  cancel() {}
+
   render() {
     let props = this.props;
+
     return (
       <div className="modal fade modal--confirm">
-        <div className="modal-dialog modal-sm">
+        <div className={classNames('modal-dialog', props.size ? 'modal-' + props.size : '')}>
           <div className="modal-content">
-            <div className="modal-body">
-              {props.text}
-            </div>
+            <div className="modal-body">{props.text}</div>
             <div className="modal-footer">
-              <button type="button" className="btn btn-primary" data-dismiss="modal" onClick={props.ok}>确定</button>
-              <button type="button" className="btn btn-default" data-dismiss="modal" onClick={props.cancel}>取消</button>
+              {(() => {
+                if (props.ok) {
+                  return [
+                    <button key="ok" type="button" className="btn btn-primary" data-dismiss="modal" onClick={props.ok}>确定</button>,
+                    <button key="cancel" type="button" className="btn btn-default" data-dismiss="modal" onClick={props.cancel || this.cancel}>取消</button>
+                  ];
+                } else {
+                  return <button type="button" className="btn btn-default" data-dismiss="modal">关闭</button>;
+                }
+              })()}
             </div>
           </div>
         </div>
@@ -51,8 +61,14 @@ let Modal = {
   },
 
   confirm(text, ok = (() => 1), cancel = (() => 1)) {
-    Modal.open(ConfirmComponent, null, {
+    Modal.open(DefaultComponent, null, {
       text, ok, cancel
+    });
+  },
+
+  alert(text) {
+    Modal.open(DefaultComponent, null, {
+      text
     });
   }
 };

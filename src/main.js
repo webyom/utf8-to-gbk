@@ -1,18 +1,24 @@
-const {app, BrowserWindow} = require('electron');
-const path = require('path');
-const url = require('url');
+import 'babel-polyfill';
+import {app, BrowserWindow, dialog} from 'electron';
+import path from 'path';
+import url from 'url';
 
-let win;
+let mainWindow;
 
 function createWindow() {
-  win = new BrowserWindow({width: 800, height: 600});
-  win.loadURL(url.format({
+  mainWindow = new BrowserWindow({
+    width: 600,
+    height: 400,
+    minWidth: 600,
+    minHeight: 400
+  });
+  mainWindow.loadURL(url.format({
     pathname: path.join(__dirname, 'index.html'),
     protocol: 'file',
     slashes: true
   }));
-  win.on('close', function () {
-    win = null;
+  mainWindow.on('close', function () {
+    mainWindow = null;
   });
 }
 
@@ -25,7 +31,12 @@ app.on('window-all-closed', function () {
 });
 
 app.on('activate', function () {
-  if (win === null) {
+  if (mainWindow === null) {
     createWindow();
   }
+});
+
+process.on('uncaughtException', async function (err) {
+  dialog.showErrorBox('程序错误，即将退出！', err.message);
+  app.quit();
 });

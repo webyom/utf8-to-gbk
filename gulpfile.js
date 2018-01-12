@@ -20,10 +20,15 @@ requireAll({
 gulp.task('init-dev', ['app-dependencies', 'babel', 'html', 'css', 'mt', 'img', 'i18n-resolve-reference']);
 
 /**
+ *  serve-dev task
+ */
+gulp.task('serve-dev', ['watch', 'serve']);
+
+/**
  *  start-dev task
  */
 gulp.task('start-dev', function (done) {
-  runSequence('clean', 'init-dev', 'watch', 'serve', function (err) {
+  runSequence('clean', 'init-dev', 'serve-dev', function (err) {
     done(err);
   });
 });

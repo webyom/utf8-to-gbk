@@ -1,11 +1,19 @@
 import $ from 'jquery';
 import React from 'react';
 import {shell} from 'electron';
-import fs from 'fs';
 import path from 'path';
 import iconv from 'iconv-lite';
+import Promise from 'bluebird';
 import Alerts from '../../util/alerts';
 import Modal from '../../util/modal';
+
+const fs = Promise.promisifyAll(require('fs'));
+
+const NoticeComponent = function (props) {
+  return <div>
+    转换后的文件已保存到<br />{props.newPath}<br />点击<strong>确定</strong>查看文件
+  </div>;
+};
 
 class ModuleComponent extends React.Component {
   componentDidMount() {
@@ -13,26 +21,22 @@ class ModuleComponent extends React.Component {
       $(this.dropBox).addClass('drag-over');
     }).on('dragleave', evt => {
       $(this.dropBox).removeClass('drag-over');
-    }).on('drop', evt => {
+    }).on('drop', async evt => {
       $(this.dropBox).removeClass('drag-over');
-      let filePath = evt.originalEvent.dataTransfer.files[0].path;
-      let content = fs.readFile(filePath, function (err, res) {
-        if (err) {
-          return Alerts.err(err);
-        }
+      try {
+        let filePath = evt.originalEvent.dataTransfer.files[0].path;
+        let res = await fs.readFileAsync(filePath);
         let buf = iconv.decode(res, 'utf-8');
         buf = iconv.encode(buf, 'gbk');
         let info = path.parse(filePath);
         let newPath = path.join(info.dir, info.name + '.gbk' + info.ext);
-        fs.writeFile(newPath, buf, function (err) {
-          if (err) {
-            return Alerts.err(err);
-          }
-          Modal.confirm('转换后的文件已保存到 ' + newPath + ' 点击确定查看文件', function () {
-            shell.showItemInFolder(newPath);
-          });
+        await fs.writeFileAsync(newPath, buf);
+        Modal.confirm(<NoticeComponent newPath={newPath} />, function () {
+          shell.showItemInFolder(newPath);
         });
-      });
+      } catch (err) {
+        Alerts.err(err);
+      }
     });
   }
 
