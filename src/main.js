@@ -10,7 +10,10 @@ function createWindow() {
     width: 600,
     height: 400,
     minWidth: 600,
-    minHeight: 400
+    minHeight: 400,
+    webPreferences: {
+      nodeIntegrationInWorker: true
+    }
   });
   mainWindow.loadURL(url.format({
     pathname: path.join(__dirname, 'index.html'),
