@@ -1,31 +1,15 @@
 import 'babel-polyfill';
-import {app, BrowserWindow, dialog} from 'electron';
-import path from 'path';
-import url from 'url';
+import {app, dialog} from 'electron';
+import * as mainWindow from './main/main-window';
+import * as mainMenu from './main/main-menu';
+import isDev from 'electron-is-dev';
 
-let mainWindow;
+isDev && require('electron-debug')({showDevTools: true});
 
-function createWindow() {
-  mainWindow = new BrowserWindow({
-    width: 600,
-    height: 400,
-    minWidth: 600,
-    minHeight: 400,
-    webPreferences: {
-      nodeIntegrationInWorker: true
-    }
-  });
-  mainWindow.loadURL(url.format({
-    pathname: path.join(__dirname, 'index.html'),
-    protocol: 'file',
-    slashes: true
-  }));
-  mainWindow.on('close', function () {
-    mainWindow = null;
-  });
-}
-
-app.on('ready', createWindow);
+app.on('ready', function () {
+  mainMenu.createMenu();
+  mainWindow.createWindow();
+});
 
 app.on('window-all-closed', function () {
   if (process.platform != 'darwin') {
@@ -34,9 +18,7 @@ app.on('window-all-closed', function () {
 });
 
 app.on('activate', function () {
-  if (mainWindow === null) {
-    createWindow();
-  }
+  mainWindow.createWindow();
 });
 
 process.on('uncaughtException', async function (err) {

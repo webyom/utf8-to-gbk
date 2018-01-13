@@ -4,9 +4,8 @@ import ReactDOM from 'react-dom';
 import {webFrame} from 'electron';
 import {useStrict} from 'mobx';
 import Skateboard from 'skateboardjs';
-import * as Util from './util/main';
+import * as Util from '../util/main';
 import path from 'path';
-import isDev from 'electron-is-dev';
 
 /**
  * use mobx strict mode
@@ -21,15 +20,8 @@ webFrame.setZoomLevelLimits(1, 1);
 /**
  * define global properties
  */
-global.installDevtools = function () {
-  if (isDev) {
-    require('devtron').install();
-    require('electron-react-devtools').install();
-  }
-};
-
 global.resolveRoot = function (p) {
-  let sep = path.sep + 'src' + path.sep;
+  let sep = path.sep + 'dist' + path.sep;
   let parts = __filename.split(sep);
   parts.pop();
   return path.resolve(path.join(parts.join(sep), 'dist'), p);
@@ -52,7 +44,7 @@ Skateboard.core.init({
   container: $('.app-wrapper'),
   defaultModName: 'main',
   alertModName: ALERT_MOD_NAME,
-  modBase: path.resolve(__dirname, 'route') + '/',
+  modBase: path.resolve(__dirname, '../route') + '/',
   loadingMsg: ' ',
   modCacheable: true,
   isSupportHistoryState: false,
