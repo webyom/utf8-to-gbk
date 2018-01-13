@@ -60,6 +60,7 @@ gulp.task('less-component', ['lesshint'], function (done) {
     })
     .pipe(mt2amd({
       commonjs: true,
+      useExternalCssModuleHelper: true,
       cssModuleClassNameGenerator: util.cssModuleClassNameGenerator
     }))
     .pipe(gulp.dest('dist/renderer/window'));

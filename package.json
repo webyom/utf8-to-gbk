@@ -34,10 +34,12 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "signals": "^1.0.0",
-    "skateboardjs": "^1.4.3"
+    "skateboardjs": "^1.4.4"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "babel-eslint": "^8.2.1",
+    "babel-plugin-external-helpers": "^6.22.0",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-preset-es2015": "^6.5.0",
     "babel-preset-react": "^6.5.0",
@@ -56,7 +58,7 @@
     "gulp-if": "^2.0.2",
     "gulp-less": "^3.4.0",
     "gulp-lesshint": "^1.1.0",
-    "gulp-mt2amd": "^0.7.0",
+    "gulp-mt2amd": "^0.8.0",
     "gulp-postcss": "^7.0.1",
     "gulp-property-merge": "^0.2.1",
     "gulp-util": "^3.0.8",

@@ -1,4 +1,5 @@
 import 'babel-polyfill';
+import './vendor/babel/external-helpers';
 import {app, dialog} from 'electron';
 import * as mainWindow from './main/main-window';
 import * as mainMenu from './main/main-menu';

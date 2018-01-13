@@ -17,6 +17,8 @@
 
       global.$ = global.jQuery = require('jquery');
       require('babel-polyfill');
+      require('../../../vendor/babel/external-helpers');
+      require('../../../vendor/gulp-mt2amd/css-module-helper');
       require('bootstrap');
       require('./main');
     </script>

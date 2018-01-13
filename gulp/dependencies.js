@@ -1,9 +1,14 @@
-var gulp = require('gulp'),
+var exec = require('child_process').exec,
+    gulp = require('gulp'),
     async = require('async'),
     mt2amd = require('gulp-mt2amd');
 
 // move dependencies into build dir
-gulp.task('app-dependencies', ['app-bundle-css-dependencies', 'app-copy-js-dependencies', 'app-copy-css-dependencies']);
+gulp.task('app-dependencies', ['app-babel-external-helpers', 'app-bundle-css-dependencies', 'app-copy-js-dependencies', 'app-copy-css-dependencies']);
+
+gulp.task('app-babel-external-helpers', function (done) {
+  exec('mkdir -p dist/vendor/babel && ./node_modules/.bin/babel-external-helpers > dist/vendor/babel/external-helpers.js', done);
+});
 
 gulp.task('app-bundle-css-dependencies', function (done) {
   async.each([
@@ -27,6 +32,7 @@ gulp.task('app-bundle-css-dependencies', function (done) {
 
 gulp.task('app-copy-js-dependencies', function (done) {
   async.each([
+    'node_modules/gulp-mt2amd/lib/css-module-helper.js',
   ], function (item, done) {
     var src = item, dest = '';
     if (Array.isArray(item)) {

@@ -1,4 +1,5 @@
 import 'babel-polyfill';
+import '../../../../../vendor/babel/external-helpers';
 import path from 'path';
 import iconv from 'iconv-lite';
 import Promise from 'bluebird';

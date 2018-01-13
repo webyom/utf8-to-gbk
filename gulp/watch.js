@@ -51,7 +51,7 @@ gulp.task('watch', function (done) {
     var filePath = evt.path;
     var part = (path.dirname(filePath) + '/').split('/src/').pop();
     gutil.log(gutil.colors.cyan('[changed]'), filePath);
-    if ((/(^|\-)main.less$/).test(path.basename(filePath)) || filePath.indexOf('/src/route/') > 0) {
+    if ((/(^|\-)main.less$/).test(path.basename(filePath)) || filePath.indexOf('/src/renderer/') > 0) {
       return gulp.src(filePath)
         .pipe(lazyTasks.lazyLesshint())
         .pipe(less()).on('error', function (err) {
@@ -60,8 +60,9 @@ gulp.task('watch', function (done) {
         .pipe(lazyTasks.lazyPostcssTask()).on('error', function (err) {
           gutil.log(gutil.colors.red(err.message));
         })
-        .pipe(gulpif(filePath.indexOf('/src/route/') > 0, mt2amd({
+        .pipe(gulpif(filePath.indexOf('/src/renderer/') > 0, mt2amd({
           commonjs: true,
+          useExternalCssModuleHelper: true,
           cssModuleClassNameGenerator: util.cssModuleClassNameGenerator
         })))
         .pipe(gulp.dest('dist/' + part));
