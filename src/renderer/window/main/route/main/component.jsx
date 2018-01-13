@@ -4,8 +4,9 @@ import {shell, remote, ipcRenderer} from 'electron';
 import {observer} from 'mobx-react';
 import {types} from 'mobx-state-tree';
 import {autobind} from 'core-decorators';
-import Alerts from '../../util/alerts';
-import Modal from '../../util/modal';
+import path from 'path';
+import Alerts from '../../../../util/alerts';
+import Modal from '../../../../util/modal';
 
 const IconvState = types.model('IconvState', {
   working: false
@@ -50,7 +51,7 @@ class ModuleComponent extends React.Component {
     if (this.iconvState.working) {
       return;
     }
-    let worker = new Worker(resolveRoot('route/main/iconv-worker.js'));
+    let worker = new Worker(path.resolve(__dirname, 'iconv-worker.js'));
     worker.onmessage = (evt) => {
       let data = evt.data;
       if (data.type == 'start') {

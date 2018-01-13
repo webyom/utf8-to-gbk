@@ -1,9 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
-
-const Wrapper = styled.div`
-  text-align: center;
-`;
 
 class ModuleComponent extends React.Component {
   render() {
@@ -11,7 +6,7 @@ class ModuleComponent extends React.Component {
     let opt = props.route.opt;
 
     return (
-      <Wrapper>
+      <div>
         <p>
           <i className="fa fa-exclamation-triangle" /> {(() => {
             if (opt.subType == 'init_mod_fail') {
@@ -24,7 +19,7 @@ class ModuleComponent extends React.Component {
           })()}
         </p>
         <a href="/:back" className="btn btn-lg btn-primary">返回</a>
-      </Wrapper>
+      </div>
     );
   }
 }

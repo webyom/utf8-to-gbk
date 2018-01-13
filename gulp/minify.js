@@ -13,12 +13,12 @@ gulp.task('minify', function () {
       collapseWhitespace: true,
       conservativeCollapse: true,
       minifyJS: {
-        outSourceMap: true,
-        sourceMapIncludeSources: true
+        outSourceMap: false,
+        sourceMapIncludeSources: false
       },
       minifyCSS: {
-        sourceMap: true,
-        sourceMapInlineSources: true
+        sourceMap: false,
+        sourceMapInlineSources: false
       },
       getKeptComment: function (content, filePath) {
         var res = [];

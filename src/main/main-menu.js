@@ -11,6 +11,9 @@ let template = [
           dialog.showOpenDialog({
             properties: ['openFile']
           }, function (filePaths) {
+            if (!filePaths) {
+              return;
+            }
             let win = mainWindow.getWindow();
             win && win.webContents.send('chooseFile', filePaths[0]);
           });

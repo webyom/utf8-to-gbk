@@ -44,30 +44,5 @@ conf.IS_BASE_PROJECT = conf.PROJECT_NAME == conf.BASE_PROJECT_NAME;
 conf.ENV = env;
 conf.VERSION_DIGEST_LEN = 4;
 conf.IS_PRODUCTION = env == 'production';
-conf.EXCLUDE_MODULES = getExcludeModules();
-
-function getExcludeModules() {
-  var modules = [];
-  if (conf.IS_BASE_PROJECT) {
-    return modules;
-  }
-  if (process.env.EXCLUDE_MODULES) {
-    modules = process.env.EXCLUDE_MODULES.split(',');
-  } else if (process.env.INCLUDE_MODULES) {
-    includes = process.env.INCLUDE_MODULES.split(',');
-    ['route'].forEach(function (type) {
-      var base = 'src/' + type;
-      if (fs.existsSync(base)) {
-        fs.readdirSync(base).forEach(function (name) {
-          if (name != 'public' && !includes.includes(name) && fs.statSync(base + '/' + name).isDirectory()) {
-            modules.push(name);
-          }
-        });
-      }
-    });
-  }
-  modules = _.uniq(modules);
-  return modules;
-}
 
 module.exports = conf;

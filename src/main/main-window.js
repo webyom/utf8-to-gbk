@@ -18,7 +18,7 @@ export function createWindow() {
     }
   });
   mainWindow.loadURL(url.format({
-    pathname: path.resolve(__dirname, '../window/main.html'),
+    pathname: path.resolve(__dirname, '../renderer/window/main/main.html'),
     protocol: 'file',
     slashes: true
   }));

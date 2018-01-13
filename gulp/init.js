@@ -10,13 +10,7 @@ var gulp = require('gulp'),
 
 // eslint js
 gulp.task('eslint', function () {
-  var src = ['src/**/*.+(js|jsx)'];
-  if (conf.EXCLUDE_MODULES.length) {
-    conf.EXCLUDE_MODULES.forEach(function (name) {
-      src.push('!src/route/' + name + '/**/*.+(js|jsx)');
-    });
-  }
-  return gulp.src(src)
+  return gulp.src(['src/**/*.+(js|jsx)'])
     .pipe(eslint())
     .pipe(eslint.format())
     .pipe(eslint.failAfterError());
@@ -24,13 +18,7 @@ gulp.task('eslint', function () {
 
 // babel
 gulp.task('babel', ['eslint'], function () {
-  var src = ['src/**/*.+(js|jsx)'];
-  if (conf.EXCLUDE_MODULES.length) {
-    conf.EXCLUDE_MODULES.forEach(function (name) {
-      src.push('!src/route/' + name + '/**/*.+(js|jsx)');
-    });
-  }
-  return gulp.src(src)
+  return gulp.src(['src/**/*.+(js|jsx)'])
     .pipe(lazyTasks.propertyMergeTask())
     .pipe(babel())
     .pipe(gulp.dest('dist'));
@@ -38,7 +26,7 @@ gulp.task('babel', ['eslint'], function () {
 
 // move html
 gulp.task('html', function () {
-  return gulp.src('src/**/*.html')
+  return gulp.src(['src/**/*.html'])
     .pipe(lazyTasks.propertyMergeTask())
     .pipe(gulp.dest('dist'));
 });
@@ -63,13 +51,7 @@ gulp.task('less-main', ['lesshint'], function (done) {
 
 // compile component less
 gulp.task('less-component', ['lesshint'], function (done) {
-  var src = ['src/route/**/style.less'];
-  if (conf.EXCLUDE_MODULES.length) {
-    conf.EXCLUDE_MODULES.forEach(function (name) {
-      src.push('!src/route/' + name + '/**/style.less');
-    });
-  }
-  return gulp.src(src)
+  return gulp.src(['src/renderer/window/**/style.less'])
     .pipe(less()).on('error', function (err) {
       done(err);
     })
@@ -80,21 +62,15 @@ gulp.task('less-component', ['lesshint'], function (done) {
       commonjs: true,
       cssModuleClassNameGenerator: util.cssModuleClassNameGenerator
     }))
-    .pipe(gulp.dest('dist/route'));
+    .pipe(gulp.dest('dist/renderer/window'));
 });
 
 // lesshint
 gulp.task('lesshint', function () {
-  var src = [
+  return gulp.src([
     'src/**/*.less',
     '!src/style/vendor/**/*.less'
-  ];
-  if (conf.EXCLUDE_MODULES.length) {
-    conf.EXCLUDE_MODULES.forEach(function (name) {
-      src.push('!src/route/' + name + '/**/style.less');
-    });
-  }
-  return gulp.src(src)
+  ])
     .pipe(lazyTasks.lazyLesshint());
 });
 

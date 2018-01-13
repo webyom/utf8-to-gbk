@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import {webFrame} from 'electron';
 import {useStrict} from 'mobx';
 import Skateboard from 'skateboardjs';
-import * as Util from '../util/main';
+import * as Util from '../../util/main';
 import path from 'path';
 
 /**
@@ -35,7 +35,6 @@ document.ondragover = document.ondrop = function (evt) {
   evt.preventDefault();
 };
 
-
 /**
  * bootstrap UI
  */
@@ -44,7 +43,7 @@ Skateboard.core.init({
   container: $('.app-wrapper'),
   defaultModName: 'main',
   alertModName: ALERT_MOD_NAME,
-  modBase: path.resolve(__dirname, '../route') + '/',
+  modBase: path.resolve(__dirname, 'route') + '/',
   loadingMsg: ' ',
   modCacheable: true,
   isSupportHistoryState: false,
