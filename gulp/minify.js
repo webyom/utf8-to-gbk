@@ -5,16 +5,17 @@ var gulp = require('gulp'),
 // minify js, css, html
 gulp.task('minify', function () {
   return gulp.src([
-      'dist/**/*.+(js|css|html)',
-      '!dist/**/*.min.+(js|css)'
+      'app/content/**/*.+(js|css|html)',
+      '!app/content/**/*.min.+(js|css)'
   ])
     .pipe(minify({
       minify: conf.IS_PRODUCTION,
-      collapseWhitespace: true,
-      conservativeCollapse: true,
+      minifyHTML: {
+        collapseWhitespace: true,
+        conservativeCollapse: true
+      },
       minifyJS: {
-        outSourceMap: false,
-        sourceMapIncludeSources: false
+        sourceMap: false
       },
       minifyCSS: {
         sourceMap: false,
@@ -34,5 +35,5 @@ gulp.task('minify', function () {
         return res.length && res.join('\n') + '\n' || '';
       }
     }))
-    .pipe(gulp.dest('dist'));
+    .pipe(gulp.dest('app/content'));
 });

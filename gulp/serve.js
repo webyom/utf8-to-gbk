@@ -7,13 +7,13 @@ gulp.task('serve', function (done) {
 
   // Restart browser process
   gulp.watch([
-    'dist/main.js'
+    'app/content/main.js'
   ], electron.restart);
 
   // Reload renderer process
   gulp.watch([
-    'dist/**/*',
-    '!dist/main.js'
+    'app/content/**/*',
+    '!app/content/main.js'
   ], electron.reload);
 
   done();

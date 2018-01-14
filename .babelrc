@@ -1,5 +1,10 @@
 {
-  "presets": ["es2015", "stage-0", "react"],
+  "presets": [["env", {
+    "targets": {
+      "chrome": "58",
+      "node": "7.9.0"
+    }
+  }], "stage-0", "react"],
   "plugins": [
     "external-helpers",
     "transform-decorators-legacy"

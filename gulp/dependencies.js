@@ -7,7 +7,7 @@ var exec = require('child_process').exec,
 gulp.task('app-dependencies', ['app-babel-external-helpers', 'app-bundle-css-dependencies', 'app-copy-js-dependencies', 'app-copy-css-dependencies']);
 
 gulp.task('app-babel-external-helpers', function (done) {
-  exec('mkdir -p dist/vendor/babel && ./node_modules/.bin/babel-external-helpers > dist/vendor/babel/external-helpers.js', done);
+  exec('mkdir -p app/content/vendor/babel && ./node_modules/.bin/babel-external-helpers > app/content/vendor/babel/external-helpers.js', done);
 });
 
 gulp.task('app-bundle-css-dependencies', function (done) {
@@ -26,7 +26,7 @@ gulp.task('app-bundle-css-dependencies', function (done) {
         commonjs: true,
         generateDataUri: false
       }))
-      .pipe(gulp.dest('dist/vendor/' + dest)).on('finish', done);
+      .pipe(gulp.dest('app/content/vendor/' + dest)).on('finish', done);
   }, done);
 });
 
@@ -43,15 +43,15 @@ gulp.task('app-copy-js-dependencies', function (done) {
       dest = dest && dest[1] || '';
     }
     gulp.src(src)
-      .pipe(gulp.dest('dist/vendor/' + dest)).on('finish', done);
+      .pipe(gulp.dest('app/content/vendor/' + dest)).on('finish', done);
   }, done);
 });
 
 gulp.task('app-copy-css-dependencies', function (done) {
   async.each([
-    ['node_modules/font-awesome/css/font-awesome.css', 'font-awesome/css'],
-    ['node_modules/font-awesome/fonts/**/*', 'font-awesome/fonts'],
-    ['node_modules/hint.css/hint.css', 'hint-css']
+    ['app/node_modules/font-awesome/css/font-awesome.css', 'font-awesome/css'],
+    ['app/node_modules/font-awesome/fonts/**/*', 'font-awesome/fonts'],
+    ['app/node_modules/hint.css/hint.css', 'hint-css']
   ], function (item, done) {
     var src = item, dest = '';
     if (Array.isArray(item)) {
@@ -62,6 +62,6 @@ gulp.task('app-copy-css-dependencies', function (done) {
       dest = dest && dest[1] || '';
     }
     gulp.src(src)
-      .pipe(gulp.dest('dist/style/vendor/' + dest)).on('finish', done);
+      .pipe(gulp.dest('app/content/style/vendor/' + dest)).on('finish', done);
   }, done);
 });

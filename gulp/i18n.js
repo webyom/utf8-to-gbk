@@ -10,7 +10,7 @@ gulp.task('i18n-resolve-reference', function () {
     .pipe(htmlI18n.resolveReference({
       langDir: 'src/lang'
     }))
-    .pipe(gulp.dest('dist/lang'));
+    .pipe(gulp.dest('app/content/lang'));
 });
 
 // validate consistence between each lang version

@@ -1,6 +1,6 @@
-/package-lock.json
-/dist/
-/release/
+package-lock.json
+/app/**/*
+!/app/package.json
 *~
 
 ### Bower ###

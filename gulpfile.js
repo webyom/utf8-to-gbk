@@ -37,7 +37,7 @@ gulp.task('start-dev', function (done) {
  *  build task
  */
 gulp.task('build', function (done) {
-  runSequence('clean', 'init-dev', 'eslint-final', 'minify', function (err) {
+  runSequence('clean', 'init-dev', 'minify', function (err) {
     done(err);
   });
 });

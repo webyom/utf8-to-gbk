@@ -24,7 +24,7 @@ gulp.task('watch', function (done) {
     var part = (path.dirname(filePath) + '/').split('/src/').pop();
     gutil.log(gutil.colors.cyan('[changed]'), filePath);
     return gulp.src(filePath)
-      .pipe(gulp.dest('dist/' + part));
+      .pipe(gulp.dest('app/content/' + part));
   });
 
   gulp.watch('src/**/*.json', function (evt) {
@@ -32,7 +32,7 @@ gulp.task('watch', function (done) {
     var part = (path.dirname(filePath) + '/').split('/src/').pop();
     gutil.log(gutil.colors.cyan('[changed]'), filePath);
     return gulp.src(filePath)
-      .pipe(gulp.dest('dist/' + part));
+      .pipe(gulp.dest('app/content/' + part));
   });
 
   gulp.watch('src/**/*.+(js|jsx)', function (evt) {
@@ -44,7 +44,7 @@ gulp.task('watch', function (done) {
       .pipe(eslint.format())
       .pipe(lazyTasks.propertyMergeTask())
       .pipe(babel())
-      .pipe(gulp.dest('dist/' + part));
+      .pipe(gulp.dest('app/content/' + part));
   });
 
   gulp.watch('src/**/*.less', function (evt) {
@@ -65,7 +65,7 @@ gulp.task('watch', function (done) {
           useExternalCssModuleHelper: true,
           cssModuleClassNameGenerator: util.cssModuleClassNameGenerator
         })))
-        .pipe(gulp.dest('dist/' + part));
+        .pipe(gulp.dest('app/content/' + part));
     } else {
       return gulp.start('less-main');
     }
