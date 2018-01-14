@@ -9,7 +9,7 @@ gulp.task('minify', function () {
       '!app/content/**/*.min.+(js|css)'
   ])
     .pipe(minify({
-      minify: conf.IS_PRODUCTION,
+      minify: true,
       minifyHTML: {
         collapseWhitespace: true,
         conservativeCollapse: true

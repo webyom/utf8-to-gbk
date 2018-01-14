@@ -1,6 +1,6 @@
 {
   "name": "utf8-to-gbk",
-  "productName": "UTF-8 to GBK",
+  "productName": "utf8-to-gbk",
   "version": "1.0.0",
   "description": "App for converting UTF8 files to GBK",
   "license": "MIT",

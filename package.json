@@ -1,6 +1,6 @@
 {
   "name": "utf8-to-gbk",
-  "productName": "UTF-8 to GBK",
+  "productName": "utf8-to-gbk",
   "version": "1.0.0",
   "description": "App for converting UTF8 files to GBK",
   "license": "MIT",
@@ -24,9 +24,9 @@
   "scripts": {
     "reinstall": "rm -rf node_modules; rm -rf app/node_modules; npm install; cd app; npm install; cd -",
     "start": "gulp start-dev",
-    "build": "NODE_ENV=production gulp build",
+    "build": "gulp build",
     "pack": "electron-builder --dir",
-    "dist": "electron-builder"
+    "dist": "electron-builder -wm"
   },
   "build": {
     "appId": "org.webyom.utf8-to-gbk",
