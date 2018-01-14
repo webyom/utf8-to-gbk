@@ -26,7 +26,7 @@
     "start": "gulp start-dev",
     "build": "gulp build",
     "pack": "electron-builder --dir",
-    "dist": "electron-builder -wm"
+    "dist": "electron-builder -mw --x64 --ia32"
   },
   "build": {
     "appId": "org.webyom.utf8-to-gbk",
