@@ -1,6 +1,5 @@
 var fs = require('fs'),
     gulp = require('gulp'),
-    gutil = require('gulp-util'),
     requireAll = require('require-all'),
     runSequence = require('run-sequence');
 
