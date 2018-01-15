@@ -3,7 +3,8 @@
 var _ = require('lodash'),
     fs = require('fs'),
     path = require('path'),
-    gutil = require('gulp-util'),
+    chalk = require('chalk'),
+    log = require('fancy-log'),
     conf = require('./conf'),
     lazypipe = require('lazypipe'),
     postcss = require('gulp-postcss'),
@@ -39,30 +40,27 @@ exports.lazyLesshint = lazypipe()
         file.lesshint.results.forEach(function (result) {
           var output = '';
           if (result.severity === 'error') {
-            output += gutil.colors.red('Error: ');
+            output += chalk.red('Error: ');
           } else {
-            output += gutil.colors.yellow('Warning: ');
+            output += chalk.yellow('Warning: ');
           }
-          output += gutil.colors.cyan(path.relative(process.cwd(), file.path)) + ': ';
+          output += chalk.cyan(path.relative(process.cwd(), file.path)) + ': ';
           if (result.line) {
-            output += gutil.colors.magenta('line ' + result.line) + ', ';
+            output += chalk.magenta('line ' + result.line) + ', ';
           }
           if (result.column) {
-            output += gutil.colors.magenta('col ' + result.column) + ', ';
+            output += chalk.magenta('col ' + result.column) + ', ';
           }
-          output += gutil.colors.green(result.linter) + ': ';
+          output += chalk.green(result.linter) + ': ';
           output += result.message;
-          gutil.log(output);
+          log(output);
           count ++;
         });
       }
       return callback(null, file);
     }).on('finish', function (x) {
       if (count) {
-        throw new gutil.PluginError('gulp-lesshint', {
-          name: 'LesshintError',
-          message: 'Failed with ' + count + (count === 1 ? ' error' : ' errors')
-        });
+        throw new Error('gulp-lesshint failed with ' + count + (count === 1 ? ' error' : ' errors'));
       }
     });
   });

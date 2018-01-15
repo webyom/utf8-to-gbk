@@ -1,12 +1,13 @@
 /* global process */
 
-var _ = require('lodash');
-var fs = require('fs');
-var path = require('path');
-var gutil = require('gulp-util');
+var _ = require('lodash'),
+    fs = require('fs'),
+    path = require('path'),
+    log = require('fancy-log'),
+    chalk = require('chalk');
 
 if (process.cwd() != path.resolve(__dirname, '..')) {
-  gutil.log(gutil.colors['red']('Please run gulp in the project root dir.'));
+  log(chalk.red('Please run gulp in the project root dir.'));
   process.exit(1);
 }
 
@@ -24,9 +25,9 @@ var conf = config[env];
   }
 
   if (conf) {
-    gutil.log('Running env ' + gutil.colors['green'](env));
+    log('Running env ' + chalk.green(env));
   } else {
-    gutil.log(gutil.colors['red']('Aborting, failed to detect env.'));
+    log(chalk.red('Aborting, failed to detect env.'));
     process.exit(0);
   }
 
@@ -42,7 +43,6 @@ conf.BASE_PROJECT_NAME =  config.baseProjectName || 'electron-base';
 conf.PROJECT_NAME = process.cwd().split(path.sep).pop();
 conf.IS_BASE_PROJECT = conf.PROJECT_NAME == conf.BASE_PROJECT_NAME;
 conf.ENV = env;
-conf.VERSION_DIGEST_LEN = 4;
 conf.IS_PRODUCTION = env == 'production';
 
 module.exports = conf;

@@ -17,7 +17,7 @@ requireAll({
 /**
  *  init tasks
  */
-gulp.task('init-dev', ['app-dependencies', 'babel', 'html', 'css', 'mt', 'img', 'i18n-resolve-reference']);
+gulp.task('init-dev', ['app-dependencies', 'babel', 'html', 'css', 'mt', 'resource', 'i18n-resolve-reference']);
 
 /**
  *  serve-dev task

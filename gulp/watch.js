@@ -2,14 +2,13 @@
 
 var path = require('path'),
     gulp = require('gulp'),
-    gutil = require('gulp-util'),
-    gulpif = require('gulp-if'),
+    chalk = require('chalk'),
+    log = require('fancy-log'),
     babel = require('gulp-babel'),
     conf = require('./conf'),
     less = require('gulp-less'),
     eslint = require('gulp-eslint'),
     mt2amd = require('gulp-mt2amd'),
-    through = require('through2'),
     util = require('./util'),
     lazyTasks = require('./lazy-tasks');
 
@@ -19,26 +18,19 @@ gulp.task('watch', function (done) {
     console.log(err.stack || err.message || err);
   });
 
-  gulp.watch('src/**/*.html', function (evt) {
+  gulp.watch('src/renderer/window/**/*.html', function (evt) {
     var filePath = evt.path;
-    var part = (path.dirname(filePath) + '/').split('/src/').pop();
-    gutil.log(gutil.colors.cyan('[changed]'), filePath);
+    var part = (path.dirname(filePath) + '/').split('/src/renderer/window/').pop();
+    log(chalk.cyan('[changed]'), filePath);
     return gulp.src(filePath)
-      .pipe(gulp.dest('app/content/' + part));
-  });
-
-  gulp.watch('src/**/*.json', function (evt) {
-    var filePath = evt.path;
-    var part = (path.dirname(filePath) + '/').split('/src/').pop();
-    gutil.log(gutil.colors.cyan('[changed]'), filePath);
-    return gulp.src(filePath)
-      .pipe(gulp.dest('app/content/' + part));
+      .pipe(lazyTasks.propertyMergeTask())
+      .pipe(gulp.dest('app/content/renderer/window/' + part));
   });
 
   gulp.watch('src/**/*.+(js|jsx)', function (evt) {
     var filePath = evt.path;
     var part = (path.dirname(filePath) + '/').split('/src/').pop();
-    gutil.log(gutil.colors.cyan('[changed]'), filePath);
+    log(chalk.cyan('[changed]'), filePath);
     return gulp.src(filePath)
       .pipe(eslint())
       .pipe(eslint.format())
@@ -47,40 +39,71 @@ gulp.task('watch', function (done) {
       .pipe(gulp.dest('app/content/' + part));
   });
 
-  gulp.watch('src/**/*.less', function (evt) {
+  gulp.watch('src/style/**/*.less', function (evt) {
     var filePath = evt.path;
-    var part = (path.dirname(filePath) + '/').split('/src/').pop();
-    gutil.log(gutil.colors.cyan('[changed]'), filePath);
-    if ((/(^|\-)main.less$/).test(path.basename(filePath)) || filePath.indexOf('/src/renderer/') > 0) {
+    var part = (path.dirname(filePath) + '/').split('/src/style/').pop();
+    log(chalk.cyan('[changed]'), filePath);
+    if ((/(^|\-)main\.less$/).test(path.basename(filePath))) {
       return gulp.src(filePath)
         .pipe(lazyTasks.lazyLesshint())
         .pipe(less()).on('error', function (err) {
-          gutil.log(gutil.colors.red(err.message));
+          log(chalk.red(err.message));
         })
         .pipe(lazyTasks.lazyPostcssTask()).on('error', function (err) {
-          gutil.log(gutil.colors.red(err.message));
+          log(chalk.red(err.message));
         })
-        .pipe(gulpif(filePath.indexOf('/src/renderer/') > 0, mt2amd({
-          commonjs: true,
-          useExternalCssModuleHelper: true,
-          cssModuleClassNameGenerator: util.cssModuleClassNameGenerator
-        })))
-        .pipe(gulp.dest('app/content/' + part));
+        .pipe(gulp.dest('app/content/style/' + part));
     } else {
       return gulp.start('less-main');
     }
   });
 
+  gulp.watch('src/renderer/**/style.less', function (evt) {
+    var filePath = evt.path;
+    var part = (path.dirname(filePath) + '/').split('/src/renderer/').pop();
+    log(chalk.cyan('[changed]'), filePath);
+    return gulp.src(filePath)
+      .pipe(lazyTasks.lazyLesshint())
+      .pipe(less()).on('error', function (err) {
+        log(chalk.red(err.message));
+      })
+      .pipe(lazyTasks.lazyPostcssTask()).on('error', function (err) {
+        log(chalk.red(err.message));
+      })
+      .pipe(mt2amd({
+        commonjs: true,
+        useExternalCssModuleHelper: true,
+        cssModuleClassNameGenerator: util.cssModuleClassNameGenerator
+      }))
+      .pipe(gulp.dest('app/content/renderer/' + part));
+  });
+
   gulp.watch('src/**/*.tpl.xhtml', function (evt) {
     var filePath = evt.path;
-    gutil.log(gutil.colors.cyan('[changed]'), filePath);
-    return gulp.start('mt');
+    var part = (path.dirname(filePath) + '/').split('/src/').pop();
+    log(chalk.cyan('[changed]'), filePath);
+    return gulp.src(filePath)
+      .pipe(mt2amd({
+        commonjs: true
+      }))
+      .pipe(gulp.dest('app/content/' + part));
   });
 
   gulp.watch('src/lang/**/*.json', function (evt) {
     var filePath = evt.path;
-    gutil.log(gutil.colors.cyan('[changed]'), filePath);
+    log(chalk.cyan('[changed]'), filePath);
     return gulp.start('i18n-resolve-reference');
+  });
+
+  gulp.watch([
+    'src/**/*.+(jpg|jpeg|gif|png|otf|eot|svg|ttf|woff|woff2|ico|mp3|swf|json)',
+    '!src/lang/**/*.json'
+  ], function (evt) {
+    var filePath = evt.path;
+    var part = (path.dirname(filePath) + '/').split('/src/').pop();
+    log(chalk.cyan('[changed]'), filePath);
+    return gulp.src(filePath)
+      .pipe(gulp.dest('app/content/' + part));
   });
 
   done();

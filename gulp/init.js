@@ -1,5 +1,4 @@
 var gulp = require('gulp'),
-    gutil = require('gulp-util'),
     conf = require('./conf'),
     babel = require('gulp-babel'),
     less = require('gulp-less'),
@@ -26,9 +25,9 @@ gulp.task('babel', ['eslint'], function () {
 
 // move html
 gulp.task('html', function () {
-  return gulp.src(['src/**/*.html'])
+  return gulp.src(['src/renderer/window/**/*.html'])
     .pipe(lazyTasks.propertyMergeTask())
-    .pipe(gulp.dest('app/content'));
+    .pipe(gulp.dest('app/content/renderer/window'));
 });
 
 // compile less
@@ -51,7 +50,7 @@ gulp.task('less-main', ['lesshint'], function (done) {
 
 // compile component less
 gulp.task('less-component', ['lesshint'], function (done) {
-  return gulp.src(['src/renderer/window/**/style.less'])
+  return gulp.src(['src/renderer/**/style.less'])
     .pipe(less()).on('error', function (err) {
       done(err);
     })
@@ -63,7 +62,7 @@ gulp.task('less-component', ['lesshint'], function (done) {
       useExternalCssModuleHelper: true,
       cssModuleClassNameGenerator: util.cssModuleClassNameGenerator
     }))
-    .pipe(gulp.dest('app/content/renderer/window'));
+    .pipe(gulp.dest('app/content/renderer'));
 });
 
 // lesshint
@@ -86,9 +85,12 @@ gulp.task('mt', function () {
     .pipe(gulp.dest('app/content'));
 });
 
-// move img
-gulp.task('img', function () {
-  return gulp.src('src/**/*.+(jpg|jpeg|gif|png|otf|eot|svg|ttf|woff|woff2|ico|mp3|swf)')
+// copy resource files
+gulp.task('resource', function () {
+  return gulp.src([
+    'src/**/*.+(jpg|jpeg|gif|png|otf|eot|svg|ttf|woff|woff2|ico|mp3|swf|json)',
+    '!src/lang/**/*.json'
+  ])
     .pipe(gulp.dest('app/content'));
 });
 
