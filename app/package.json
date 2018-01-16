@@ -41,6 +41,6 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "signals": "^1.0.0",
-    "skateboardjs": "^1.4.4"
+    "skateboardjs": "^1.4.5"
   }
 }
